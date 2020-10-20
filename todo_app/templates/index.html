@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-12">
         <h2>Add a New To-Do</h2>
-        <form class="form-inline" action="http://localhost:5000/add" method="post">
+        <form class="form-inline" action="/add" method="post">
             <div class="form-group ml-2">
                 <input type="text" class="form-control" name="title" placeholder="My New To-Do">
             </div>
@@ -25,6 +25,7 @@
                     <th scope="col">id</th>
                     <th scope="col">Title</th>
                     <th scope="col">Status</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,9 +33,29 @@
                 {% for item in items %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.title }}</td>
-                        <td>{{ item.status }}</td>
+                        {% if  item.status == 'Not Started'  %}
+                            <td>{{ item.title }}</td>
+                        {% else %}
+                            <td style="text-decoration: line-through;">{{ item.title }}</td>
+                        {% endif %}
+                        {% if  item.status == 'Not Started'  %}
+                            <td>
+                                <form action="/complete" method="post">
+                                    <input hidden name="id" value={{ item.id }}>
+                                    <button type="submit" class="btn btn-primary btn-sm">Mark Complete</button>
+                                </form>
+                            </td>
+                        {% else %}
+                            <td style="color: green;font-weight: bold;">{{ item.status }}</td>
+                        {% endif %}
+                    <td>
+                        <form action="/delete" method="post">
+                            <input hidden name="id" value={{ item.id }}>
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
                     </tr>
+
                 {% endfor %}
                 </tbody>
             </table>
