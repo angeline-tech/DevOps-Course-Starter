@@ -9,26 +9,35 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-          <table>
-              <tr>
-                  <th>Number</th>
-                  <th>To-Do</th>
-                  <th>Status</th>
-              </tr>
-              <!-- List the todo items here -->
-              {% for item in items %}
-                  <tr>
-                      <td>{{ item.id }}</td>
-                      <td>{{ item.title }}</td>
-                      <td>{{ item.status }}</td>
-                  </tr>
+        <h2>Add a New To-Do</h2>
+        <form class="form-inline" action="http://localhost:5000/add" method="post">
+            <div class="form-group ml-2">
+                <input type="text" class="form-control" name="title" placeholder="My New To-Do">
+            </div>
+            <button type="submit" class="btn btn-primary ml-2">Add</button>
+        </form>
+        <h2>Items</h2>
 
-              {% endfor %}
-
-          </table>
-
+        <ul class="list-group mb-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- List the todo items here -->
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.status }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
       </ul>
     </div>
   </div>
