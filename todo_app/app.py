@@ -16,13 +16,13 @@ def index():
     return render_template('index.html', items=get_items())
 
 
-@app.route('/add', methods=['POST', 'GET'])
+@app.route('/add', methods=['POST'])
 def add_to_do():
     add_item(request.form['title'])
     return redirect('/')
 
 
-@app.route('/complete', methods=['POST', 'GET'])
+@app.route('/complete', methods=['POST'])
 def update_to_do():
     id = request.form['id']
     item = get_item(id)
@@ -31,7 +31,7 @@ def update_to_do():
     return redirect('/')
 
 
-@app.route('/delete', methods=['POST', 'GET'])
+@app.route('/delete', methods=['POST'])
 def delete_to_do():
     id = request.form['id']
     item = get_item(id)
