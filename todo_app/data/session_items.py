@@ -2,7 +2,7 @@ from flask import session
 
 _DEFAULT_ITEMS = [
     { 'id': 1, 'status': 'Not Started', 'title': 'List saved todo items' },
-    { 'id': 2, 'status': 'Not Started', 'title': 'Allow new items to be added' }
+    { 'id': 2, 'status': 'Complete', 'title': 'Allow new items to be added' }
 ]
 
 
@@ -28,6 +28,21 @@ def get_item(id):
     """
     items = get_items()
     return next((item for item in items if item['id'] == int(id)), None)
+
+
+def delete_item(item):
+    """
+    Deletes the item with the specified ID.
+
+    Args:
+        id: The ID of the item.
+
+    """
+    items = get_items()
+
+    items.remove(item)
+
+    session['items'] = items
 
 
 def add_item(title):
