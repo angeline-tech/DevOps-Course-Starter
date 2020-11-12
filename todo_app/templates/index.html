@@ -29,7 +29,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- List the todo items here -->
                 {% for item in items %}
                     <tr>
                         <td>{{ item.id }}</td>
@@ -38,14 +37,6 @@
                                 style="text-decoration: line-through;"
                                 {% endif %}
                         >{{ item.title }}</td>
-
-
-
-{#                        {% if  item.status == 'Not Started'  %}#}
-{#                            <td>{{ item.title }}</td>#}
-{#                        {% else %}#}
-{#                            <td style="text-decoration: line-through;">{{ item.title }}</td>#}
-{#                        {% endif %}#}
                         {% if  item.status == 'Not Started'  %}
                             <td>
                                 <form action="/complete" method="post">
