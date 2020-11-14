@@ -22,6 +22,29 @@ def trello_cards():
     return render_template('trello_index.html', cards=get_all_cards())
 
 
+@app.route('/session_add', methods=['POST'])
+def session_add_to_do():
+    add_item(request.form['title'])
+    return redirect('/')
+
+
+@app.route('/session_complete', methods=['POST'])
+def session_update_to_do():
+    id = request.form['id']
+    item = get_item(id)
+    item['status'] = "Complete"
+    save_item(item)
+    return redirect('/')
+
+
+@app.route('/session_delete', methods=['POST'])
+def session_delete_to_do():
+    id = request.form['id']
+    item = get_item(id)
+    delete_item(item)
+    return redirect('/')
+
+
 @app.route('/add', methods=['POST'])
 def add_to_do():
     add_item(request.form['title'])
