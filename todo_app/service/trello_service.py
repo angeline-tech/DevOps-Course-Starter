@@ -1,14 +1,12 @@
 import requests
 import os
 
-api_key = os.getenv("TRELLO_API_KEY")
-trello_token = os.getenv("TRELLO_TOKEN")
-auth = "key={apiKey}&token={trelloToken}".format(apiKey=api_key, trelloToken=trello_token)
 trello = "https://api.trello.com/1/"
+auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELLO_TOKEN"))
 
 
 def get_cards_in_list(list_id, status):
-    url = trello+"lists/{listId}/cards?key={apiKey}&token={trelloToken}".format(listId=os.getenv(list_id), apiKey=api_key, trelloToken=trello_token)
+    url = trello+"lists/"+os.getenv(list_id)+"/cards"+auth
     response = requests.get(url)
     raw_cards = response.json()
     parsed_cards = []
