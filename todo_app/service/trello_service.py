@@ -21,6 +21,11 @@ def create_to_do(description):
     return requests.post(url)
 
 
+def move_card_to_in_progress(card_id):
+    url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_IN_PROGRESS")
+    return requests.put(url)
+
+
 def move_card_to_complete(card_id):
     url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_DONE")
     return requests.put(url)
