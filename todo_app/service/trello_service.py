@@ -20,6 +20,12 @@ def create_to_do(description):
     url = trello+"cards/"+auth+"&idList="+os.getenv("TRELLO_TO_DO")+"&name="+description
     return requests.post(url)
 
+
+def move_card_to_complete(card_id):
+    url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_DONE")
+    return requests.put(url)
+
+
 def delete_card(card_id):
     url = trello+"cards/"+card_id+auth
     return requests.delete(url)
