@@ -7,6 +7,7 @@ auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELL
 
 def get_cards_in_list(list_id, status):
     url = trello+"lists/"+os.getenv(list_id)+"/cards"+auth
+    print(url)
     response = requests.get(url)
     raw_cards = response.json()
     parsed_cards = []
@@ -19,6 +20,11 @@ def get_cards_in_list(list_id, status):
 def create_to_do(description):
     url = trello+"cards/"+auth+"&idList="+os.getenv("TRELLO_TO_DO")+"&name="+description
     return requests.post(url)
+
+
+def move_card_to_to_do(card_id):
+    url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_TO_DO")
+    return requests.put(url)
 
 
 def move_card_to_in_progress(card_id):

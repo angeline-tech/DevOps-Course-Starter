@@ -26,6 +26,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                         <th scope="col">Action</th>
+                        <th scope="col">Action</th>
                         <th scope="col">Delete</th>
                         <th scope="col"></th>
                     </tr>
@@ -36,11 +37,18 @@
                             <td>{{ card.name }}</td>
                             <td>{{ card.status }}</td>
                             <td>
+                                <form action="/reset" method="post">
+                                    <input hidden name="id" value={{ card.id }}>
+                                    <button type="submit" class="btn btn-primary btn-sm">Move to To-Do</button>
+                                </form>
+                            </td>
+                            <td>
                                 <form action="/start" method="post">
                                     <input hidden name="id" value={{ card.id }}>
                                     <button type="submit" class="btn btn-primary btn-sm">Start Work</button>
                                 </form>
-                            </td> <td>
+                            </td>
+                            <td>
                                 <form action="/complete" method="post">
                                     <input hidden name="id" value={{ card.id }}>
                                     <button type="submit" class="btn btn-primary btn-sm">Complete</button>
