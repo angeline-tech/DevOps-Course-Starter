@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from todo_app.data.session_items import get_items, add_item, save_item, get_item, delete_item
 from todo_app.flask_config import Config
-from todo_app.service.trello_service import get_all_cards
+from todo_app.service.trello_service import get_all_cards, create_to_do
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -25,7 +25,7 @@ def trello_cards():
 @app.route('/session_add', methods=['POST'])
 def session_add_to_do():
     add_item(request.form['title'])
-    return redirect('/')
+    return redirect('/session')
 
 
 @app.route('/session_complete', methods=['POST'])
@@ -34,7 +34,7 @@ def session_update_to_do():
     item = get_item(id)
     item['status'] = "Complete"
     save_item(item)
-    return redirect('/')
+    return redirect('/session')
 
 
 @app.route('/session_delete', methods=['POST'])
@@ -42,12 +42,12 @@ def session_delete_to_do():
     id = request.form['id']
     item = get_item(id)
     delete_item(item)
-    return redirect('/')
+    return redirect('/session')
 
 
 @app.route('/add', methods=['POST'])
 def add_to_do():
-    add_item(request.form['title'])
+    create_to_do(request.form['title'])
     return redirect('/')
 
 

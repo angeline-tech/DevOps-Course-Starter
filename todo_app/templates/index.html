@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-12">
         <h2>Add a New To-Do</h2>
-        <form class="form-inline" action="/add" method="post">
+        <form class="form-inline" action="/session_add" method="post">
             <div class="form-group ml-2">
                 <input required type="text" class="form-control" name="title" placeholder="My New To-Do">
             </div>
@@ -39,7 +39,7 @@
                         >{{ item.title }}</td>
                         {% if  item.status == 'Not Started'  %}
                             <td>
-                                <form action="/complete" method="post">
+                                <form action="/session_complete" method="post">
                                     <input hidden name="id" value={{ item.id }}>
                                     <button type="submit" class="btn btn-primary btn-sm">Mark Complete</button>
                                 </form>
@@ -48,7 +48,7 @@
                             <td style="color: green;font-weight: bold;">{{ item.status }}</td>
                         {% endif %}
                     <td>
-                        <form action="/delete" method="post">
+                        <form action="/session_delete" method="post">
                             <input hidden name="id" value={{ item.id }}>
                             <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                         </form>

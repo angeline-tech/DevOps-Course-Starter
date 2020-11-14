@@ -15,8 +15,14 @@ def get_cards_in_list(list_id, status):
         parsed_cards.append(card)
     return parsed_cards
 
+
 def create_to_do(description):
-    url = "https://api.trello.com/1/cards/?key={apiKey}&token={token}&idList={list_id}&name={name}"
+    url = trello+"cards/"+auth+"&idList="+os.getenv("TRELLO_TO_DO")+"&name="+description
+    return requests.post(url)
+
+def delete_card(card_id):
+    url = trello+"cards/"+card_id+auth
+    return requests.delete(url)
 
 
 def get_all_cards():
