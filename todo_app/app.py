@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect
 from todo_app.data.session_items import get_items, add_item, save_item, get_item, delete_item
 from todo_app.flask_config import Config
-from todo_app.service.trello_service import get_all_cards, create_to_do, delete_card, move_card_to_complete, move_card_to_in_progress, move_card_to_to_do
+from todo_app.service.trello_service import get_all_cards, create_to_do, delete_card, move_card_to_complete, \
+    move_card_to_in_progress, move_card_to_to_do
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -55,7 +56,7 @@ def add_to_do():
 def complete_to_do():
     card_id = request.form['id']
     move_card_to_complete(card_id)
-    return redirect('/')\
+    return redirect('/')
 
 
 @app.route('/start', methods=['POST'])

@@ -34,29 +34,29 @@
                     <tbody>
                     {% for card in cards %}
                         <tr>
-                            <td>{{ card.name }}</td>
+                            <td>{{ card.description }}</td>
                             <td>{{ card.status }}</td>
                             <td>
                                 <form action="/reset" method="post">
-                                    <input hidden name="id" value={{ card.id }}>
+                                    <input hidden name="id" value={{ card.card_id }}>
                                     <button type="submit" class="btn btn-primary btn-sm">Move to To-Do</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="/start" method="post">
-                                    <input hidden name="id" value={{ card.id }}>
+                                    <input hidden name="id" value={{ card.card_id }}>
                                     <button type="submit" class="btn btn-primary btn-sm">Start Work</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="/complete" method="post">
-                                    <input hidden name="id" value={{ card.id }}>
+                                    <input hidden name="id" value={{ card.card_id }}>
                                     <button type="submit" class="btn btn-primary btn-sm">Complete</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="/delete" method="post">
-                                    <input hidden name="id" value={{ card.id }}>
+                                    <input hidden name="id" value={{ card.card_id }}>
                                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                 </form>
                             </td>
