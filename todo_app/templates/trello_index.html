@@ -17,57 +17,82 @@
                 <button type="submit" class="btn btn-primary ml-2">Add</button>
             </form>
             <h2>Items</h2>
-
             <ul class="list-group mb-4">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col"></th>
+                        <th scope="col">Description</th>
+                        <th scope="col">
+                            {% if sort_status=="ASCENDING" %}
+                                <form action="/sort" method="post">
+                                    <input hidden name="id" value="DESCENDING">
+                                    Status
+                                    <button type="submit" class="btn btn-link btn-sm" style="width:50px">↑</button>
+                                </form>
+                            {% else %}
+                                <form action="/sort" method="post">
+                                    <input hidden name="id" value="ASCENDING">
+                                    Status
+                                    <button type="submit" class="btn btn-link btn-sm" style="width:50px">↓</button>
+                                </form>
+                            {% endif %}
+                        </th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
-                    <form action="/sort" method="post">
-                        <input hidden name="id" value="ASCENDING">
-                        <button type="submit" class="btn btn-primary btn-sm">Sort Ascending</button>
-                    </form>
-                    <form action="/sort" method="post">
-                        <input hidden name="id" value="DESCENDING">
-                        <button type="submit" class="btn btn-primary btn-sm">Sort Descending</button>
-                    </form>
+
                     <tbody>
                     {% for card in cards %}
                         <tr>
-                            <td>{{ card.description }}</td>
-                            <td>{{ card.status }}</td>
-                            <td>
-                                <form action="/reset" method="post">
-                                    <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn btn-primary btn-sm">Move to To-Do</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="/start" method="post">
-                                    <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn btn-primary btn-sm">Start Work</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="/complete" method="post">
-                                    <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn btn-primary btn-sm">Complete</button>
-                                </form>
-                            </td>
                             <td>
                                 <form action="/delete" method="post">
                                     <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">X</button>
                                 </form>
                             </td>
+                            <td
+                                {% if  card.status == 'Done'  %}
+                                    style="text-decoration: line-through;"
+                                {% endif %}
+                            >{{ card.description }}</td>
+                            <td
+                                    {% if  card.status == 'Done'  %}
+                                        style="color: #28a745;font-weight: bold;"
+                                    {% endif %}
+                                    {% if  card.status == 'To-Do'  %}
+                                        style="color: #dc3545;font-weight: bold;"
+                                    {% endif %}
+                                    {% if  card.status == 'In Progress'  %}
+                                        style="color: #007bff;font-weight: bold;"
+                                    {% endif %}
+                            >{{ card.status }}</td>
+                            {% if card.status!="To-Do" %}
+                                <td>
+                                    <form action="/reset" method="post">
+                                        <input hidden name="id" value={{ card.card_id }}>
+                                        <button type="submit" class="btn btn-secondary btn-sm">Move to To-Do</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                            {% if card.status!="In Progress" %}
+                                <td>
+                                    <form action="/start" method="post">
+                                        <input hidden name="id" value={{ card.card_id }}>
+                                        <button type="submit" class="btn btn-primary btn-sm">Move to In Progress</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                            {% if card.status!="Done" %}
+                                <td>
+                                    <form action="/complete" method="post">
+                                        <input hidden name="id" value={{ card.card_id }}>
+                                        <button type="submit" class="btn btn-success btn-sm">Move to Complete</button>
+                                    </form>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

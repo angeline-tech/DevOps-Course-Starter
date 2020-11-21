@@ -58,3 +58,7 @@ def get_cards():
 
 def sort_cards(ascending):
     to_do_list.sort_by_status(ascending)
+
+
+def get_sorted_status():
+    return to_do_list.ascending

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from todo_app.data.session_items import get_items, add_item, save_item, get_item, delete_item
 from todo_app.flask_config import Config
 from todo_app.service.trello_service import create_to_do, delete_card, move_card_to_complete, \
-    move_card_to_in_progress, move_card_to_to_do, get_cards, fetch_updated_cards, sort_cards
+    move_card_to_in_progress, move_card_to_to_do, get_cards, fetch_updated_cards, sort_cards, get_sorted_status
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,7 +21,7 @@ def session_cards():
 @app.route('/')
 def trello_cards():
     fetch_updated_cards()
-    return render_template('trello_index.html', cards=get_cards())
+    return render_template('trello_index.html', cards=get_cards(), sort_status = get_sorted_status())
 
 
 @app.route('/session_add', methods=['POST'])
@@ -80,20 +80,12 @@ def delete_to_do():
     delete_card(card_id)
     return redirect('/')
 
-# TODO: Figure out a way to do this, right now the page fetches and then loads, but to sort
-
 
 @app.route('/sort', methods=['POST'])
 def sort():
     ascending = request.form['id']
     sort_cards(ascending)
     return redirect('/')
-
-
-@app.route('/playground')
-def playground():
-    response = get_cards()
-    return response.__str__()
 
 
 if __name__ == '__main__':
