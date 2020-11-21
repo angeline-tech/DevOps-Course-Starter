@@ -31,6 +31,14 @@
                         <th scope="col"></th>
                     </tr>
                     </thead>
+                    <form action="/sort" method="post">
+                        <input hidden name="id" value="ASCENDING">
+                        <button type="submit" class="btn btn-primary btn-sm">Sort Ascending</button>
+                    </form>
+                    <form action="/sort" method="post">
+                        <input hidden name="id" value="DESCENDING">
+                        <button type="submit" class="btn btn-primary btn-sm">Sort Descending</button>
+                    </form>
                     <tbody>
                     {% for card in cards %}
                         <tr>

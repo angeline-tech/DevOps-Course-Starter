@@ -1,14 +1,16 @@
 import requests
 import os
 
-from todo_app.data.item import to_card
+from todo_app.data.item import to_card, CardList
 
 trello = "https://api.trello.com/1/"
 auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELLO_TOKEN"))
 
+to_do_list = CardList([], "ASCENDING")
+
 
 def get_cards_in_list(list_id, status):
-    url = trello+"lists/"+os.getenv(list_id)+"/cards"+auth
+    url = trello + "lists/" + os.getenv(list_id) + "/cards" + auth
     response = requests.get(url)
     raw_cards = response.json()
     parsed_cards = []
@@ -19,32 +21,40 @@ def get_cards_in_list(list_id, status):
 
 
 def create_to_do(description):
-    url = trello+"cards/"+auth+"&idList="+os.getenv("TRELLO_TO_DO")+"&name="+description
+    url = trello + "cards/" + auth + "&idList=" + os.getenv("TRELLO_TO_DO") + "&name=" + description
     return requests.post(url)
 
 
 def move_card_to_to_do(card_id):
-    url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_TO_DO")
+    url = trello + "cards/" + card_id + auth + "&idList=" + os.getenv("TRELLO_TO_DO")
     return requests.put(url)
 
 
 def move_card_to_in_progress(card_id):
-    url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_IN_PROGRESS")
+    url = trello + "cards/" + card_id + auth + "&idList=" + os.getenv("TRELLO_IN_PROGRESS")
     return requests.put(url)
 
 
 def move_card_to_complete(card_id):
-    url = trello+"cards/"+card_id+auth+"&idList="+os.getenv("TRELLO_DONE")
+    url = trello + "cards/" + card_id + auth + "&idList=" + os.getenv("TRELLO_DONE")
     return requests.put(url)
 
 
 def delete_card(card_id):
-    url = trello+"cards/"+card_id+auth
+    url = trello + "cards/" + card_id + auth
     return requests.delete(url)
 
 
-def get_all_cards():
+def fetch_updated_cards():
     to_do_cards = get_cards_in_list("TRELLO_TO_DO", "To-Do")
     in_progress_cards = get_cards_in_list("TRELLO_IN_PROGRESS", "In Progress")
     done_cards = get_cards_in_list("TRELLO_DONE", "Done")
-    return to_do_cards + in_progress_cards + done_cards
+    to_do_list.update_cards(to_do_cards + in_progress_cards + done_cards)
+
+
+def get_cards():
+    return to_do_list.get_sorted_cards()
+
+
+def sort_cards(ascending):
+    to_do_list.sort_by_status(ascending)
