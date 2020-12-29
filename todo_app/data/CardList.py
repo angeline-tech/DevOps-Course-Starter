@@ -1,12 +1,4 @@
-from typing import List
-
-
-class Card:
-
-    def __init__(self, card_id, description, status):
-        self.card_id = card_id
-        self.description = description
-        self.status = status
+from todo_app.data.Card import Card
 
 
 class CardList:

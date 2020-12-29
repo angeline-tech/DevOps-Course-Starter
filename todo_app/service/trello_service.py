@@ -1,7 +1,7 @@
 import requests
 import os
 
-from todo_app.data.item import to_card, CardList
+from todo_app.data.CardList import to_card, CardList
 
 trello = "https://api.trello.com/1/"
 auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELLO_TOKEN"))
