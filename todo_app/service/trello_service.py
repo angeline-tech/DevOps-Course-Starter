@@ -21,7 +21,7 @@ def get_cards_in_list(list_id, status):
 
 
 def create_to_do(description):
-    url = trello + "cards/" + auth + "&idList=" + os.getenv("TRELLO_TO_DO") + "&name=" + description
+    url = f"{trello}cards/{auth}&idList={os.getenv('TRELLO_TO_DO')}&name={description}"
     return requests.post(url)
 
 
