@@ -1,7 +1,8 @@
 import requests
 import os
 
-from todo_app.data.CardList import to_card, CardList
+from todo_app.data.Card import Card
+from todo_app.data.CardList import CardList
 
 trello = "https://api.trello.com/1/"
 auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELLO_TOKEN"))
@@ -16,7 +17,7 @@ def get_cards_in_list(list_id, status):
     parsed_cards = []
     for card in raw_cards:
         card["status"] = status
-        parsed_cards.append(to_card(card))
+        parsed_cards.append(Card.from_raw(card))
     return parsed_cards
 
 

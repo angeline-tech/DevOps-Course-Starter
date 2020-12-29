@@ -18,7 +18,3 @@ class CardList:
 
     def sort_by_status(self, ascending: bool):
         self.ascending = ascending
-
-
-def to_card(raw_card):
-    return Card(raw_card["id"], raw_card["name"], raw_card["status"])
