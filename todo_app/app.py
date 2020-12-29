@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect
+
+from todo_app.data.ViewModel import ViewModel
 from todo_app.flask_config import Config
 import todo_app.service.trello_service as trello
 
@@ -15,7 +17,8 @@ def heartbeat():
 def trello_cards():
     ascending = request.args.get('ascending') != 'false'
     trello.fetch_updated_cards()
-    return render_template('index.html', cards=trello.get_cards(ascending), sort_status = ascending)
+    model = ViewModel(trello.get_cards(ascending), ascending)
+    return render_template('index.html', view_model=model)
 
 
 @app.route('/add', methods=['POST'])

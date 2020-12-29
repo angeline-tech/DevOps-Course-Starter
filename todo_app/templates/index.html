@@ -24,7 +24,7 @@
                         <th scope="col"></th>
                         <th scope="col">Description</th>
                         <th scope="col">
-                            {% if sort_status %}
+                            {% if view_model._sort_status %}
                                 <form action="/sort" method="post">
                                     <input hidden name="id" value="DESCENDING">
                                     Status
@@ -45,7 +45,7 @@
                     </thead>
 
                     <tbody>
-                    {% for card in cards %}
+                    {% for card in view_model._cards %}
                         <tr>
                             <td>
                                 <form action="/delete" method="post">
