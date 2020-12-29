@@ -13,8 +13,9 @@ def heartbeat():
 
 @app.route('/')
 def trello_cards():
+    ascending = request.args.get('ascending') != 'false'
     trello.fetch_updated_cards()
-    return render_template('index.html', cards=trello.get_cards(), sort_status = trello.get_sorted_status())
+    return render_template('index.html', cards=trello.get_cards(ascending), sort_status = ascending)
 
 
 @app.route('/add', methods=['POST'])
@@ -53,9 +54,8 @@ def delete_to_do():
 
 @app.route('/sort', methods=['POST'])
 def sort():
-    ascending = request.form['id']
-    trello.sort_cards(ascending)
-    return redirect('/')
+    ascending = request.form['id'] == 'ASCENDING'
+    return redirect('/?ascending=true') if ascending else redirect('/?ascending=false')
 
 
 if __name__ == '__main__':

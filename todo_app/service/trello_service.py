@@ -7,7 +7,7 @@ from todo_app.data.CardList import CardList
 trello = "https://api.trello.com/1/"
 auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELLO_TOKEN"))
 
-to_do_list = CardList([], "ASCENDING")
+to_do_list = CardList([])
 
 
 def get_cards_in_list(list_id, status):
@@ -53,13 +53,5 @@ def fetch_updated_cards():
     to_do_list.update_cards(to_do_cards + in_progress_cards + done_cards)
 
 
-def get_cards():
-    return to_do_list.get_sorted_cards()
-
-
-def sort_cards(ascending):
-    to_do_list.sort_by_status(ascending)
-
-
-def get_sorted_status():
-    return to_do_list.ascending
+def get_cards(ascending: bool = True):
+    return to_do_list.get_sorted(ascending)
