@@ -8,3 +8,15 @@ class Card:
     @classmethod
     def from_raw(cls, raw_card):
         return cls(raw_card["id"], raw_card["name"], raw_card["status"])
+
+    @classmethod
+    def to_do(cls):
+        return "To-do"
+
+    @classmethod
+    def in_progress(cls):
+        return "In Progress"
+
+    @classmethod
+    def done(cls):
+        return "Done"
