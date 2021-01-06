@@ -58,3 +58,12 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Runnning Tests
+
+To run tests run the following command. 
+```bash
+$ poetry run pytest tests
+```
+This will run any test defined in a function
+matching the pattern ``test_*`` or ``*_test``, in any file matching the same patterns, in the ``tests`` directory.
