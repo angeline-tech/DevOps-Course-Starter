@@ -1,5 +1,9 @@
+from typing import List
+from todo_app.data.Card import Card
+
+
 class CardList:
-    def __init__(self, cards: []):
+    def __init__(self, cards: List[Card]):
         self.cards = cards
 
     def update_cards(self, new_cards):

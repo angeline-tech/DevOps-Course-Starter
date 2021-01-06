@@ -17,7 +17,8 @@ def get_cards_in_list(list_id, status):
     parsed_cards = []
     for card in raw_cards:
         card["status"] = status
-        parsed_cards.append(Card.from_raw(card))
+        parsed_card = Card.from_raw(card)
+        parsed_cards.append(parsed_card)
     return parsed_cards
 
 
@@ -47,9 +48,9 @@ def delete_card(card_id):
 
 
 def fetch_updated_cards():
-    to_do_cards = get_cards_in_list("TRELLO_TO_DO", "To-Do")
-    in_progress_cards = get_cards_in_list("TRELLO_IN_PROGRESS", "In Progress")
-    done_cards = get_cards_in_list("TRELLO_DONE", "Done")
+    to_do_cards = get_cards_in_list("TRELLO_TO_DO", Card.to_do)
+    in_progress_cards = get_cards_in_list("TRELLO_IN_PROGRESS", Card.in_progress)
+    done_cards = get_cards_in_list("TRELLO_DONE", Card.completed)
     to_do_list.update_cards(to_do_cards + in_progress_cards + done_cards)
 
 
