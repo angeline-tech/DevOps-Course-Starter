@@ -10,3 +10,13 @@ old_done_card = Card("5", "finished ages ago", Card.completed, datetime.now()-ti
 SampleCards = [to_do, in_progress, done]
 
 DoneCards = [done, new_done_card, old_done_card]
+
+
+def empty_array():
+    return []
+
+def sample_cards():
+    return SampleCards
+
+def done_cards():
+    return DoneCards

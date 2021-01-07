@@ -9,13 +9,15 @@ auth = "?key={0}&token={1}".format(os.getenv("TRELLO_API_KEY"), os.getenv("TRELL
 
 to_do_list = CardList([])
 
-
-def get_cards_in_list(list_id, status):
+def request_cards(list_id):
     url = trello + "lists/" + os.getenv(list_id) + "/cards" + auth
     response = requests.get(url)
-    raw_cards = response.json()
+    return response.json()
+
+def get_cards_in_list(list_id, status):
+    trello_cards = request_cards(list_id)
     parsed_cards = []
-    for card in raw_cards:
+    for card in trello_cards:
         card["status"] = status
         parsed_card = Card.from_raw(card)
         parsed_cards.append(parsed_card)
