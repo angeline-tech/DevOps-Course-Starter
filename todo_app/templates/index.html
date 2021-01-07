@@ -10,14 +10,29 @@
 <div class="container">
 
     <div class="row">
+        <div class="col">
+            <h2>Add a New To-Do</h2>
+            <form class="form-inline" action="/add" method="post">
+                <div class="form-group ml-2">
+                    <input required type="text" class="form-control" name="title" placeholder="My New To-Do">
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">Add</button>
+            </form>
+        </div>
+        <div class="col" style="text-align: right; ">
+                {% if not view_model.show_all_done_items %}
+                <form action="/show_older" method="post">
+                    <input hidden name="id" value="true">
+                    <button type="submit" class="btn btn-secondary" title="Show Older">Show Older Completed Items</button>
+                </form>
+                {% else %}
+                <form action="/show_older" method="post">
+                    <input hidden name="id" value="false">
+                    <button type="submit" class="btn btn-secondary" title="Hide Older">Hide Older Completed Items</button>
+                </form>
+                {% endif %}
+        </div>
 
-        <h2>Add a New To-Do</h2>
-        <form class="form-inline" action="/add" method="post">
-            <div class="form-group ml-2">
-                <input required type="text" class="form-control" name="title" placeholder="My New To-Do">
-            </div>
-            <button type="submit" class="btn btn-primary ml-2">Add</button>
-        </form>
     </div>
     <br/>
     <div class="row">
@@ -35,7 +50,6 @@
                 </colgroup>
                 <tbody>
                     {% for card in view_model.to_do_items %}
-
                     <tr>
                         <td>
                             <form action="/delete" method="post">
@@ -118,7 +132,7 @@
                         <col span="1" style="width: 10%;">
                     </colgroup>
                     <tbody>
-                        {% for card in view_model.complete_items %}
+                        {% for card in (view_model.complete_items if view_model.show_all_done_items else view_model.recently_done_items) %}
                         <tr>
                             <td>
                                 <form action="/delete" method="post">
@@ -128,6 +142,7 @@
                             </td>
                             <td>
                                 {{card.description}}
+                                {{card.modified}}
                             </td>
                             <td>
                                 <form action="/reset" method="post">

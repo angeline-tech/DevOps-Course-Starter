@@ -15,9 +15,11 @@ def heartbeat():
 
 @app.route('/')
 def trello_cards():
-    ascending = request.args.get('ascending') != 'false'
+    ascending = request.args.get('ascending') != 'false' # default to true
+    show_older = request.args.get('show_older') != 'false' # default to true
+    print(show_older)
     trello.fetch_updated_cards()
-    model = ViewModel(trello.get_cards(ascending), ascending)
+    model = ViewModel(trello.get_cards(ascending), ascending,show_older)
     return render_template('index.html', view_model=model)
 
 
@@ -60,6 +62,11 @@ def sort():
     ascending = request.form['id'] == 'ASCENDING'
     return redirect('/?ascending=true') if ascending else redirect('/?ascending=false')
 
+
+@app.route('/show_older', methods=['POST'])
+def show_older():
+    show_older = request.form['id'] == 'true'
+    return redirect('/?show_older=true') if show_older else redirect('/?show_older=false')
 
 if __name__ == '__main__':
     app.run()
