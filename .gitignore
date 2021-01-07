@@ -109,6 +109,9 @@ dmypy.json
 ## Intellij ###
 .idea/
 
+## Intellij ###
+.vscode
+
 ### macOS ###
 .DS_Store
 
