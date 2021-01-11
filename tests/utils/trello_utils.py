@@ -13,7 +13,7 @@ raw_card_1 = {
     "idAttachmentCover": None,
     "idLabels": [],
     "manualCoverAttachment": False,
-    "name": "Do not touch",
+    "name": "My Fake Completed Task",
     "pos": 147456,
     "shortLink": "3zgt2ZxV",
     "isTemplate": False,
@@ -68,7 +68,7 @@ raw_card_2 = {
     "idAttachmentCover": None,
     "idLabels": [],
     "manualCoverAttachment": False,
-    "name": "2",
+    "name": "My Fake In Progress Task",
     "pos": 49152,
     "shortLink": "ifkVVRDs",
     "isTemplate": False,
@@ -123,7 +123,7 @@ raw_card_3 = {
     "idAttachmentCover": None,
     "idLabels": [],
     "manualCoverAttachment": False,
-    "name": "Help",
+    "name": "My Fake Task To Be Done",
     "pos": 114688,
     "shortLink": "eDsSzpm9",
     "isTemplate": False,
@@ -169,7 +169,7 @@ def raw_cards(list_id):
     if(list_id=='TRELLO_IN_PROGRESS'):
         return [raw_card_2]  
     if(list_id=='TRELLO_DONE'):
-        return [raw_card_2]
+        return [raw_card_3]
     else:
         return []
 

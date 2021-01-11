@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 from todo_app.data.Card import Card
 from todo_app.data.CardList import CardList
@@ -58,3 +59,25 @@ def fetch_updated_cards():
 
 def get_cards(ascending: bool = True):
     return to_do_list.get_sorted(ascending)
+
+def create_lists(boardId,name):
+    url = trello+"/lists"+auth+"&idBoard="+boardId+"&name="+name
+    response = requests.post(url)
+    data = response.json()
+    return data['id']
+
+
+def create_board():
+    url = trello + "boards/"+auth+"&name=test"
+    response = requests.post(url)
+    data = response.json()
+    boardId = data['id']
+    todo_id = create_lists(boardId,"todo_test")
+    doing_id = create_lists(boardId,"doing_test")
+    done_id = create_lists(boardId,"done_test")
+    return boardId,todo_id,doing_id,done_id
+
+def delete_board(boardId:str):
+    url = trello + "boards/"+boardId+"/"+auth
+    response = requests.delete(url)
+    return response

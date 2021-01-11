@@ -1,3 +1,4 @@
+from tests.utils.string_utils import bytesContain
 from tests.utils.card_utils import empty_array, sample_cards
 from tests.utils.trello_utils import raw_cards
 import pytest
@@ -26,9 +27,11 @@ def mocked_requests(monkeypatch):
 def test_heartbeat(client):
     response = client.get('/heartbeat')
     assert response.status_code == 200
-    assert response.data == b'Flask Server is Running'
+    assert bytesContain(response.data,"Flask Server is Running") 
 
 def test_index(mocked_requests,client):
     response = client.get('/')
     assert response.status_code == 200
-    # assert response.data == b'Flask Server is Running'
+    assert bytesContain(response.data,"My Fake In Progress Task") 
+    assert bytesContain(response.data,"My Fake Completed Task") 
+    assert bytesContain(response.data,"My Fake Task To Be Done") 
