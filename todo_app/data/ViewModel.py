@@ -30,7 +30,11 @@ class ViewModel:
     def complete_items(self): return list(filter(lambda x: x.status == Card.completed, self._cards))
 
     @property
-    def recently_done_items(self): return list(filter(lambda x: x.completed_today, self._cards))
+    def recently_done_items(self): 
+        if len(self.complete_items) < 5:
+            return self.complete_items
+        else:
+            return list(filter(lambda x: x.completed_today, self._cards))
 
     @property
     def all_done_items(self): return list(filter(lambda x: x.status == Card.completed, self._cards))
