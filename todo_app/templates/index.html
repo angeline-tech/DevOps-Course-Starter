@@ -50,26 +50,26 @@
                 </colgroup>
                 <tbody>
                     {% for card in view_model.to_do_items %}
-                    <tr>
+                    <tr id={{"todo_row_{0}".format(card.description)}}>
                         <td>
                             <form action="/delete" method="post">
                                 <input hidden name="id" value={{ card.card_id }}>
-                                <button type="submit" class="btn" title="Delete">❌</button>
+                                <button type="submit" id={{"todo_delete_{0}".format(card.description)}} class="btn" title="Delete">❌</button>
                             </form>
                         </td>
                         <td>
-                            {{card.description}}
+                            {{card.description}} 
                         </td>
                         <td>
                             <form action="/start" method="post">
                                 <input hidden name="id" value={{ card.card_id }}>
-                                <button type="submit" class="btn" title="Move to In Progress">➡</button>
+                                <button type="submit" class="btn"  id={{"todo_to_in_progress_{0}".format(card.description)}} title="Move to In Progress">➡</button>
                             </form>
                         </td>
                         <td>
                             <form action="/complete" method="post">
                                 <input hidden name="id" value={{ card.card_id }}>
-                                <button type="submit" class="btn" title="Move to Complete">✅</button>
+                                <button type="submit" class="btn" id={{"todo_to_complete_{0}".format(card.description)}} title="Move to Complete">✅</button>
                             </form>
                         </td>
                     </tr>
@@ -92,11 +92,11 @@
                 </colgroup>
                 <tbody>
                     {% for card in view_model.in_progress_items %}
-                    <tr>
+                    <tr id={{"doing_row_{0}".format(card.description)}}>
                         <td>
                             <form action="/delete" method="post">
                                 <input hidden name="id" value={{ card.card_id }}>
-                                <button type="submit" class="btn" title="Delete">❌</button>
+                                <button type="submit" class="btn" id={{"doing_delete_{0}".format(card.description)}} title="Delete">❌</button>
                             </form>
                         </td>
                         <td>
@@ -105,13 +105,13 @@
                         <td>
                             <form action="/reset" method="post">
                                 <input hidden name="id" value={{ card.card_id }}>
-                                <button type="submit" class="btn" title="Move to To-do">⬅️</button>
+                                <button type="submit" class="btn" id={{"doing_to_todo_{0}".format(card.description)}} title="Move to To-do">⬅️</button>
                             </form>
                         </td>
                         <td>
                             <form action="/complete" method="post">
                                 <input hidden name="id" value={{ card.card_id }}>
-                                <button type="submit" class="btn" title="Move to Complete">✅</button>
+                                <button type="submit" class="btn" id={{"doing_to_complete_{0}".format(card.description)}} title="Move to Complete">✅</button>
                             </form>
                         </td>
                     </tr>
@@ -133,11 +133,11 @@
                     </colgroup>
                     <tbody>
                         {% for card in (view_model.complete_items if view_model.show_all_done_items else view_model.recently_done_items) %}
-                        <tr>
+                        <tr id={{"done_row_{0}".format(card.description)}}>
                             <td>
                                 <form action="/delete" method="post">
                                     <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn" title="Delete">❌</button>
+                                    <button type="submit" class="btn" id={{"done_delete_{0}".format(card.description)}} title="Delete">❌</button>
                                 </form>
                             </td>
                             <td>
@@ -147,13 +147,13 @@
                             <td>
                                 <form action="/reset" method="post">
                                     <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn" title="Move to To-do">⬅️⬅️</button>
+                                    <button type="submit" class="btn" id={{"done_to_todo_{0}".format(card.description)}} title="Move to To-do">⬅️⬅️</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="/start" method="post">
                                     <input hidden name="id" value={{ card.card_id }}>
-                                    <button type="submit" class="btn" title="Move to In Progress">⬅️</button>
+                                    <button type="submit" class="btn" id={{"done_to_in_progress_{0}".format(card.description)}} title="Move to In Progress">⬅️</button>
                                 </form>
                             </td>
                         </tr>
