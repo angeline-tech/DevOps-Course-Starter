@@ -6,9 +6,6 @@ import todo_app.service.trello_service as trello
 
 bp = Blueprint('todo_app', __name__)
 
-def fake():
-    return 'Fakeee'
-
 @bp.route('/heartbeat')
 def heartbeat():
     return 'Flask Server is Running'

@@ -59,7 +59,15 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
-## Runnning Tests
+## Tests
+
+### Prerequisites
+
+* Geckodriver
+* Firefox
+* Add the path to the GeckoDriver Executable your `.env` file (`GECKO_PATH`)
+
+### Running the Tests
 
 To run tests run the following command. 
 ```bash
