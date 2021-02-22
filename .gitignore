@@ -46,6 +46,9 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+# Web Driver Logs
+geckodriver.log
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -108,6 +111,9 @@ dmypy.json
 
 ## Intellij ###
 .idea/
+
+## Intellij ###
+.vscode
 
 ### macOS ###
 .DS_Store
