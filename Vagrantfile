@@ -64,13 +64,16 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+
+    # Update apt-get
     sudo apt-get update
-    # TODO: Install pyenv prerequisites
+    
+    # Install pyenv prerequisites
     sudo apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev \
     libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
     xz-utils tk-dev libffi-dev liblzma-dev python-openssl git 
-    # TODO: Install pyenv
-
+    
+    # Install Pyenv and set global python environment
     if [[! -d "$HOME/.pyenv" ]]; then
       echo "--- Installing PYENV ---"
       git clone https://github.com/pyenv/pyenv.git ~/.pyenv
@@ -81,8 +84,13 @@ Vagrant.configure("2") do |config|
       pyenv global 3.8.5
     else
       echo "--- PYENV already installed (Skipping) ---"
-      echo "Global Python Version is"
+      echo Global Python Version is...
       python --version
     fi
+
+    # Install Poetry
+    echo "--- Installing Poetry ---"
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+
     SHELL
 end
