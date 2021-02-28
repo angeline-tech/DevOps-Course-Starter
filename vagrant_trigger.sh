@@ -5,4 +5,4 @@ cd /vagrant
 pwd
 
 poetry install
-nohup poetry run flask run > logs.txt 2>&1 &
+nohup poetry run flask run --host 0.0.0.0 > logs.txt 2>&1 &
