@@ -74,19 +74,20 @@ Vagrant.configure("2") do |config|
     xz-utils tk-dev libffi-dev liblzma-dev python-openssl git 
     
     # Install Pyenv and set global python environment
-    if [[! -d "$HOME/.pyenv" ]]; then
+    # if [[! -d "$HOME/.pyenv" ]]; then
       echo "--- Installing PYENV ---"
+      rm -rf $HOME/.pyenv
       git clone https://github.com/pyenv/pyenv.git ~/.pyenv
       echo 'PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
       echo 'PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
       echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.profile
       pyenv install 3.8.5
       pyenv global 3.8.5
-    else
+    # else
       echo "--- PYENV already installed (Skipping) ---"
       echo Global Python Version is...
       python --version
-    fi
+    # fi
 
     # Install Poetry
     echo "--- Installing Poetry ---"
