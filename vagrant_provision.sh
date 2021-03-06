@@ -12,10 +12,10 @@ xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 
 # Cloning Pyenv 
 if [ -d "$HOME/.pyenv" ] ;then
-    echo "PYENV already Cloned" 
-    else
-    echo "--- Cloning PYENV ---"
-    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo "PYENV already Cloned" 
+else
+echo "--- Cloning PYENV ---"
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 fi
 
 
