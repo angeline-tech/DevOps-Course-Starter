@@ -1,0 +1,12 @@
+
+# Environment Variables
+.env
+.env.template
+.env.test
+
+# Vagrant stuff
+Vagrantfile
+vagrant_*.sh
+
+#logs
+logs.txt
