@@ -4,7 +4,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 
 ENV PATH=$PATH:/root/.poetry/bin
 
-WORKDIR /todo-app
+WORKDIR /todo_app
 
 COPY pyproject.toml poetry.lock ./
 
@@ -20,6 +20,9 @@ ENTRYPOINT [ "poetry" , "run" ]
 
 CMD [ "gunicorn","--bind", "0.0.0.0:5000", "todo_app.app:app" ]
 
+FROM base as development
 
+ENTRYPOINT [ "poetry" , "run" ]
 
+CMD [ "flask","run", "--host=0.0.0.0" ]
 
