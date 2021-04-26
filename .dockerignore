@@ -1,0 +1,20 @@
+
+# Environment Variables
+.env
+.env.template
+.env.test
+.venv
+
+# Git 
+.git 
+
+# Cache
+.pytest_cache
+
+# Vagrant stuff
+Vagrantfile
+vagrant_*.sh
+
+#logs
+logs.txt
+geckodriver.log
