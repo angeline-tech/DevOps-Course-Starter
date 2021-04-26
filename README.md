@@ -11,7 +11,7 @@ All three options require you to have a valid .env file.
 
 ## Creating a valid .env file
 
-You need to create a `.env` file from the `.env.tempalate` to store local configuration options. This is a one-time operation on first setup:
+You need to create a `.env` file from the `.env.template` to store local configuration options. This is a one-time operation on first setup:
 
 ```bash
 $ cp .env.template .env  # (first time only)

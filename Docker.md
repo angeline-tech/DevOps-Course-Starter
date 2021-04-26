@@ -17,7 +17,7 @@ $ docker build --target development --tag todo_app:dev .
 ```
 Once you have your image you can start the container by running:
 ```bash
-$ docker run --env-file .env -p 5000:5000 --volume $(pwd)/todo_app:/todo_app/todo_app  todo_app:dev 
+$ docker run --env-file .env -p 5000:5000 --volume ${pwd}/todo_app:/todo_app/todo_app  todo_app:dev 
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
@@ -46,6 +46,6 @@ $ docker-compose up
 
 The prod container will be running on port 5000 [`http://localhost:5000/`](http://localhost:5000/) 
 
-The dev container will be running on port 8080 [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view production app.
+The dev container will be running on port 8080 [`http://localhost:8080/`](http://localhost:8080/) in your web browser to view production app.
 
 The forwarded ports can be changed in the [docker-compose file](docker-compose.yml) to suit your needs
