@@ -84,8 +84,3 @@ def delete_board(boardId:str):
     response = requests.delete(url)
     return response
 
-
-# class Trello_Service:
-#     def __init__(self,auth_string):
-#         self._auth = auth_string
-    
